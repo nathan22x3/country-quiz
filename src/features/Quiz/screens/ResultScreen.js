@@ -1,10 +1,10 @@
+import ResultImage from 'assets/images/winners.svg';
+import { getScores, restartRound } from 'features/Quiz/quizSlice';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 /** @jsxImportSource @emotion/react */
 import tw from 'twin.macro';
-import ResultImage from 'assets/images/winners.svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { getScores, restartRound } from '../quizSlice';
-import { useHistory } from 'react-router-dom';
 
 const ResultScreen = () => {
   const dispatch = useDispatch();

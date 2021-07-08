@@ -1,12 +1,12 @@
 import AdventureImage from 'assets/images/adventure.svg';
 import AnswerOption from 'features/Quiz/components/AnswerOption';
 import {
-  generateCapitalQuestion,
   getAnswers,
   getData,
   getQuestion,
   getStatus,
   increScore,
+  randomQuestion,
 } from 'features/Quiz/quizSlice';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +25,12 @@ const GameScreen = () => {
   const [selected, setSelected] = useState();
   const [completed, setCompleted] = useState(false);
 
+  const handleSelect = (answer) => {
+    setSelected(answer);
+    if (answer.isCorrect) dispatch(increScore());
+    setCompleted(true);
+  };
+
   const handleCheck = (answer) => {
     if (selected.text === answer.text && selected.isCorrect) {
       return 'correct';
@@ -34,22 +40,16 @@ const GameScreen = () => {
     return 'default';
   };
 
-  const handleSelect = (answer) => {
-    setSelected(answer);
-    if (answer.isCorrect) dispatch(increScore());
-    setCompleted(true);
-  };
-
   const handleNext = () => {
     if (selected.isCorrect) {
       setSelected(undefined);
-      dispatch(generateCapitalQuestion());
+      dispatch(randomQuestion());
     } else router.push('/result');
     setCompleted(false);
   };
 
   useEffect(() => {
-    dispatch(generateCapitalQuestion());
+    dispatch(randomQuestion());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
@@ -70,7 +70,14 @@ const GameScreen = () => {
           <span>Loading...</span>
         ) : (
           <>
-            <p css={tw`text-2xl font-bold text-blue`}>{question}</p>
+            {question.image && (
+              <img
+                src={question.image}
+                alt='Flag'
+                css={tw`w-[84px] rounded-md mb-7 shadow-xl`}
+              />
+            )}
+            <p css={tw`text-2xl font-bold text-blue`}>{question.text}</p>
             <section
               css={tw`flex flex-col gap-y-6 my-8`}
               style={{ counterReset: 'answer' }}

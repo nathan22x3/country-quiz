@@ -15,7 +15,7 @@
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="[https://{your-url-to-the-solution}](https://devchallenges.io/solutions/oWSYseUP2gZCYbVEspZy)">
       Solution
     </a>
     <span> | </span>
@@ -41,7 +41,7 @@
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+<img src="src/assets/images/result.gif" alt='Result' width="100%" />
 
 ### Built With
 
@@ -53,7 +53,7 @@
 
 This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/Bu3G2irnaXmfwQ8sZkw8) was to build an application to complete the given user stories.
 
-- [ ] **User story**: You can see at 2 types of questions: a city is the capital of.. or a flag belong to country..
+- [x] **User story**: You can see at 2 types of questions: a city is the capital of.. or a flag belong to country..
 - [x] **User story**: You can see select an answer
 - [x] **User story**: You can see if my answer is correct or incorrect
 - [x] **User story**: When you answer correctly, you can move on to the next question

@@ -8,11 +8,19 @@ export const fetchData = createAsyncThunk('quiz/fetchData', async () => {
   return data;
 });
 
+export const randomQuestion = createAsyncThunk(
+  'quiz/randomQuestion',
+  async (_, { dispatch }) => {
+    const types = [generateCapitalQuestion(), generateFlagQuestion()];
+    dispatch(types[Math.floor(Math.random() * types.length)]);
+  }
+);
+
 const quizSlice = createSlice({
   name: 'quiz',
   initialState: {
     data: [],
-    question: '',
+    question: { text: '', image: '' },
     answers: [],
     scores: 0,
     status: 'idle',
@@ -45,7 +53,37 @@ const quizSlice = createSlice({
 
       shuffleArray(result.answers);
 
-      state.question = result.question;
+      state.question.text = result.question;
+      state.question.image = '';
+      state.answers = result.answers;
+    },
+    generateFlagQuestion: (state) => {
+      const data = [...state.data];
+      const result = {
+        question: 'Which country does this flag belong to?',
+        flag: '',
+        answers: [],
+      };
+
+      for (let index = 0; index < 4; index++) {
+        try {
+          const randomItem = getRandomItem(data);
+          const answer = { text: '', isCorrect: false };
+
+          if (index === 0) {
+            result.flag = randomItem.flag;
+            answer.isCorrect = true;
+          }
+
+          answer.text = randomItem.name;
+          result.answers.push(answer);
+        } catch (error) {}
+      }
+
+      shuffleArray(result.answers);
+
+      state.question.text = result.question;
+      state.question.image = result.flag;
       state.answers = result.answers;
     },
   },
@@ -62,7 +100,12 @@ const quizSlice = createSlice({
 
 const { reducer, actions } = quizSlice;
 
-export const { increScore, restartRound, generateCapitalQuestion } = actions;
+export const {
+  increScore,
+  restartRound,
+  generateCapitalQuestion,
+  generateFlagQuestion,
+} = actions;
 
 export const getData = ({ quiz }) => quiz.data;
 export const getQuestion = ({ quiz }) => quiz.question;

@@ -11,7 +11,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://nathan22x3.github.io/country-quiz">
+    <a href="https://country-quiz-nathan22x3.surge.sh">
       Demo
     </a>
     <span> | </span>
